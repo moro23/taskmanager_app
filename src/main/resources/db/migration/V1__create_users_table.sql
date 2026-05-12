@@ -1,10 +1,10 @@
 -- V1: Create users table
--- Flyway naming convention: V{number}__{description}.sql
--- The double underscore (__) is REQUIRED. Flyway won't recognize the file without it.
--- NEVER edit a migration after it's been run. Always create a new one.
+--
+-- Flyway convention: V{version}__{description}.sql (double underscore required).
+-- Migrations are immutable once applied; all future schema changes require a new versioned script.
 
 CREATE TABLE users (
-    id              BIGSERIAL PRIMARY KEY,
+    id              BIGSERIAL    PRIMARY KEY,
     email           VARCHAR(255) NOT NULL UNIQUE,
     password_hash   VARCHAR(255) NOT NULL,
     full_name       VARCHAR(100) NOT NULL,
@@ -13,4 +13,5 @@ CREATE TABLE users (
     updated_at      TIMESTAMP    NOT NULL DEFAULT NOW()
 );
 
+-- Supports login lookups by email (high-frequency, equality predicate).
 CREATE INDEX idx_users_email ON users(email);
