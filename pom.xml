@@ -6,11 +6,6 @@
 
     <!--
         PARENT POM: This is key to understanding Spring Boot.
-        By inheriting from spring-boot-starter-parent, we get:
-        - Pre-configured dependency versions (no version conflicts)
-        - Sensible plugin defaults
-        - Java version configuration
-        You almost NEVER specify versions for Spring libraries manually.
     -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,9 +16,6 @@
 
     <!--
         PROJECT COORDINATES: Maven identifies every project by these 3 values.
-        groupId = your organization (reversed domain name convention)
-        artifactId = your project name
-        version = SNAPSHOT means "in development"
     -->
     <groupId>com.taskmanager</groupId>
     <artifactId>task-manager-api</artifactId>
@@ -39,8 +31,7 @@
     <dependencies>
         <!--
             SPRING WEB: Brings in Spring MVC, embedded Tomcat server,
-            and Jackson (JSON serialization). This single dependency gives
-            you everything needed to build REST APIs.
+            and Jackson (JSON serialization). 
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,11 +40,7 @@
 
         <!--
             SPRING DATA JPA: This is how Java talks to databases.
-            Brings in Hibernate (ORM that maps Java objects to tables),
-            Spring Data (generates repository implementations from interfaces),
-            and HikariCP (connection pool).
 
-            Coming from another language: think of this as your ORM layer.
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -62,8 +49,6 @@
 
         <!--
             VALIDATION: Lets you annotate fields with @NotBlank, @Size, @Email.
-            Spring automatically validates request bodies annotated with @Valid.
-            No manual if-checks needed.
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -72,8 +57,7 @@
 
         <!--
             SPRING SECURITY: Authentication and authorization framework.
-            WARNING: Adding this dependency immediately locks down ALL endpoints.
-            We'll configure it to allow public access to auth routes.
+           
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -82,8 +66,6 @@
 
         <!--
             POSTGRESQL DRIVER: The JDBC driver that connects Java to PostgreSQL.
-            scope=runtime means it's needed when the app runs, but your code
-            never directly imports classes from this library.
         -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -93,9 +75,7 @@
 
         <!--
             FLYWAY: Database migration tool.
-            Instead of manually running CREATE TABLE statements, you write
-            numbered SQL files. Flyway runs them in order on app startup
-            and tracks what's been applied. This is version control for your schema.
+
         -->
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -133,7 +113,6 @@
         <!--
             SWAGGER / OPENAPI: Auto-generates interactive API documentation
             from your controller annotations. Visit /swagger-ui.html when running.
-            Reviewers love seeing documented APIs.
         -->
         <dependency>
             <groupId>org.springdoc</groupId>
