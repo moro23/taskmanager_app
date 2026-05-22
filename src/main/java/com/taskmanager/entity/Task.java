@@ -2,22 +2,26 @@ package com.taskmanager.entity;
 
 import com.taskmanager.enums.TaskPriority; 
 import com.taskmanager.enums.TaskStatus; 
-import jakarkta.persisence.*; 
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.hibernate.annotations.CreationTimestamp; 
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.annotation.processing.Generated; 
 
-@Entity 
+@Entity
 @Table(name="tasks")
 
 public class Task {
 
     @Id 
-    @GeneratedValue(strategy=GenerationType.IDENTIFY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id; 
 
 
@@ -38,7 +42,7 @@ public class Task {
     @Column(name="due_date")
     private LocalDate dueDate; 
 
-    @ManyToOne(fetch=FetchType.Lazy)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=false)
     private User user; 
 
@@ -69,7 +73,7 @@ public class Task {
     }
 
     public TaskPriority getPriority(){
-        reutrn priority; 
+        return priority; 
     }
 
     public LocalDate getDueDate(){
@@ -84,11 +88,11 @@ public class Task {
         return createdAt;
     }
 
-    public LocalDatetime getUpdatedAt(){
+    public LocalDateTime getUpdatedAt(){
         return updatedAt;
     }
 
-    public void  setTile(String title){
+    public void  setTitle(String title){
         this.title = title;
     }
 
@@ -96,7 +100,7 @@ public class Task {
         this.description = description; 
     }
 
-    public void setStatus(String status){
+    public void setStatus(TaskStatus status){
         this.status = status;
     }
 

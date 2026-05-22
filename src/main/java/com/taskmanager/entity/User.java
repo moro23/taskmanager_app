@@ -16,12 +16,12 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 
 
-@entity
+@Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTIFY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(nullable=false, unique=true)
@@ -30,7 +30,7 @@ public class User {
     @Column(name="password_hash", nullable=false)
     private String passwordHash; 
 
-    @Column(name="full_nme", nullable=false, length=100)
+    @Column(name="full_name", nullable=false, length=100)
     private String fullName; 
 
     @Enumerated(EnumType.STRING)
@@ -58,6 +58,26 @@ public class User {
     @Override
     public String getUsername(){
         return email; 
+    }
+
+    @Override 
+    public boolean isAccountNonExpired(){
+        return true; 
+    }
+
+    @Override 
+    public boolean isAccountNonLocked(){
+        return true; 
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired(){
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(){
+        return true; 
     }
 
     // -- Getters and Setters --- 
@@ -90,7 +110,7 @@ public class User {
         this.email = email; 
     }
 
-    public void setPasswordHast(String passwordHash){
+    public void setPasswordHash(String passwordHash){
         this.passwordHash = passwordHash;
     }
 
@@ -98,7 +118,7 @@ public class User {
         this.fullName = fullName;
     }
 
-    public void setRole(String role){
+    public void setRole(Role role){
         this.role = role;
     }
 
